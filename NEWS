@@ -1,3 +1,16 @@
+feedbackd 0.8.4
+---------------
+Released August 2025
+* Support LEDs with legacy naming as used on e.g. the N900 and
+  Motorola Droid 4
+* Add `key-pressed` and `key-released` events that e.g. OSKs can
+  use to emit haptic feedback in silent mode
+* Issues fixed:
+    * https://gitlab.freedesktop.org/agx/feedbackd/-/issues/85
+* Contributors:
+    * Guido Günther
+    * Sicelo A. Mhlongo
+
 feedbackd 0.8.3
 ---------------
 Released June 2025
