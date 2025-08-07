@@ -1,3 +1,38 @@
+feedbackd (0.8.4) experimental; urgency=medium
+
+  [ Sicelo A. Mhlongo ]
+  * fbd-dev-led: Support LEDs with legacy naming.
+    As noted in include/dt-bindings/leds/common.h in the Linux kernel, the Nokia
+    N900 has leds that use legacy naming. Until this naming scheme is removed from
+    the kernel, support it through the use of an additional FEEDBACKD_LED_COLOR
+    udev property, which must be set to the color corresponding to the LED.
+  * udev: Support legacy LED naming.
+    The Nokia N900 and Motorola Droid 4 use obsolete naming for LEDs, as indicated
+    in include/dt-bindings/leds/common.h in the Linux kernel. Since the obsolete
+    naming is still in wide use, support them in feedbackd until it is eventually
+    removed in the kernel.
+  * tests: Test legacy LED name detection
+
+  [ Guido Günther ]
+  * doc: Sort events alphabetically.
+    While we have "button-{pressed,released}" events there's often the
+    desire to control sound for key presses of e.g. on screen keyboards too.
+    Add a separate event for that.
+  * data: Add key press/release events.
+    While we have "button-{pressed,released}" events there's often the
+    desire to control sound for key presses of e.g. on screen keyboards too.
+    Add separate events for that.
+    This allows us to e.g. add a particular sound for OSK key presses and
+    OSKs can send this with an `important` hint so they're also usable
+    in silent mode.
+    Closes: https://gitlab.freedesktop.org/agx/feedbackd/-/issues/85
+  * schema: Allow Stevia OSK to override the globla feedback level
+  * schema: Allow all OSK to use important hint.
+    OSK use the common OSK app-id so allow that too.
+    Fixes: 4ba029d ("schema: Allow Stevia OSK to override the globla feedback level")
+
+ -- Guido Günther <agx@sigxcpu.org>  Wed, 06 Aug 2025 08:36:00 +0200
+
 feedbackd (0.8.3) experimental; urgency=medium
 
   [ Guido Günther ]
