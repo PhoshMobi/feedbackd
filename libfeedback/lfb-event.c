@@ -687,7 +687,7 @@ lfb_event_end_feedback_async (LfbEvent            *self,
  * @self: The event
  * @timeout: The timeout
  *
- * Tells the feedback server to end feedack after #timeout seconds.
+ * Tells the feedback server to end feedback after #timeout seconds.
  * The value -1 indicates to not set a timeout and let feedbacks stop
  * on their own while 0 indicates to loop all feedbacks endlessly.
  * They must be stopped via [method@LfbEvent.end_feedback] in this case.

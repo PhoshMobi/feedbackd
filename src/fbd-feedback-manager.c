@@ -371,7 +371,7 @@ parse_hints (GVariant                *hints,
 /**
  * add_event_feedbacks:
  *
- * Add the suitable feedacks to the event.
+ * Add the suitable feedbacks to the event.
  *
  * Returns: `TRUE` if at least on feedback was added.
  */
