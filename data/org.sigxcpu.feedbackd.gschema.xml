@@ -39,7 +39,7 @@
                 'sm.puri.OSK0']</default>
       <summary>List of apps that can override the feedback level</summary>
       <description>
-        Apps listed here can override the configured feedback level by
+        Apps listed here can override the configured global feedback level by
         setting the 'important' hint on the submitted event.
       </description>
     </key>

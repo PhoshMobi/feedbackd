@@ -51,8 +51,8 @@ These gsettings are used by ``feedbackd``:
 
     - `profile`: The current overall feedback profile. Valid  values are
       `full`, `quiet` and `silent`.
-    - `allow-important`: List of apps that can override the feedback level
-      (useful for e.g. allowing the alarm clock to also emit sound when
+    - `allow-important`: List of apps that can override the global feedback
+      level (useful for e.g. allowing the alarm clock to also emit sound when
       device is in silent mode).
     - `prefer-flash`: Prefer camera flash over status LED
     - `theme`: The feedback theme to use. This can be used to override

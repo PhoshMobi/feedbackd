@@ -817,7 +817,7 @@ lfb_event_get_feedback_profile (LfbEvent *self)
  *
  * Tells the feedback server that the sender deems this to be an
  * important event. A feedback server might allow the sender to
- * override the current feedback level when this is set.
+ * override the current global feedback level when this is set.
  */
 void
 lfb_event_set_important (LfbEvent *self, gboolean important)
