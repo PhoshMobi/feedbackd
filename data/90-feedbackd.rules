@@ -7,6 +7,8 @@ ACTION=="remove", GOTO="feedbackd_end"
 #
 # Haptic
 #
+# Awinic AW86927 driver (not mainline)
+SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT}=="1", SUBSYSTEMS=="input", ATTRS{name}=="aw86927-haptics", TAG+="uaccess", ENV{FEEDBACKD_TYPE}="vibra"
 # Awinic AW8695 driver (not mainline)
 SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT}=="1", SUBSYSTEMS=="input", ATTRS{name}=="aw8695-haptics", TAG+="uaccess", ENV{FEEDBACKD_TYPE}="vibra"
 # Generic gpio-vibra driver (e.g. PinePhone)
