@@ -1,3 +1,24 @@
+feedbackd (0.8.5) experimental; urgency=medium
+
+  [ Luca Weiss ]
+  * udev: Add rule for AW86927.
+    Driver is currently under review upstream:
+    https://lore.kernel.org/linux-arm-msm/20250814-aw86927-v3-0-c99434083e6a@fairphone.com/
+
+  [ Guido Günther ]
+  * treewide: Fix feedack typo
+  * feedback-manager: Let app level cap important level.
+    As per DBus spec the `important` hint is meant to override
+    the global feedback level not any per app level the user
+    might have configured as otherwise there's no way to override
+    this.
+    Closes: https://gitlab.freedesktop.org/agx/feedbackd/-/issues/93
+  * treewide: Clarify that `important` affects the global level.
+    The DBus spec had it right but the other places weren't clear
+    on that.
+
+ -- Guido Günther <agx@sigxcpu.org>  Tue, 30 Sep 2025 10:17:40 +0200
+
 feedbackd (0.8.4) experimental; urgency=medium
 
   [ Sicelo A. Mhlongo ]

@@ -1,3 +1,14 @@
+feedbackd 0.8.5
+---------------
+Released September 2025
+* Clarify that `important` is meant to override the global app level
+* Add udev rule for FP5 haptic
+* Issues fixed:
+    * https://gitlab.freedesktop.org/agx/feedbackd/-/issues/93
+* Contributors:
+    * Guido Günther
+    * Luca Weiss
+
 feedbackd 0.8.4
 ---------------
 Released August 2025
