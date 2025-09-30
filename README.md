@@ -298,7 +298,7 @@ a haptic device is found.
 ## Getting in Touch
 
 - Issue tracker: <https://gitlab.freedesktop.org/agx/feedbackd/-/issues>
-- Matrix: <https://matrix.to/#/#phosh:sigxcpu.org>
+- Matrix: <https://matrix.to/#/#phosh:phosh.mobi>
 
 ## Code of Conduct
 
