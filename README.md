@@ -309,7 +309,7 @@ on IRC and bug tracker.
 
 ## Documentation
 
-- [Libfeedback API](https://honk.sigxcpu.org/projects/feedbackd/doc/)
+- [Libfeedback API](https://feedbackd-b29738.pages.freedesktop.org/)
 - [Event naming spec draft](./doc/Event-naming-spec-0.0.0.md)
 - [Feedback-theme-spec draft](./doc/Feedback-theme-spec-0.0.0.md)
 - [W3's vibration API draft](https://www.w3.org/TR/vibration/)

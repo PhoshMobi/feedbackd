@@ -5,9 +5,9 @@ include:
 
 stages:
   - build
-  - test
+  - test+docs
   - style-checks
-  - package
+  - deploy
 
 variables:
   FDO_UPSTREAM_REPO: agx/feedbackd
@@ -82,7 +82,7 @@ build:clang:native-debian-trixie:full:
 test:native-debian-trixie:
   <<: *image
   <<: *before_script
-  stage: test
+  stage: test+docs
   needs:
     - build:gcc:native-debian-trixie:full
   coverage: '/^\s+lines\.+:\s+([\d.]+\%)\s+/'
@@ -93,8 +93,26 @@ test:native-debian-trixie:
     variables:
       - $PKG_ONLY == "1"
 
+build-doc:
+  stage: test+docs
+  image: ${DEBIAN_IMAGE}
+  variables:
+    BUILD_OPTS: -Dtests=false -Dgtk_doc=true
+  <<: *image
+  <<: *before_script
+  needs: []
+  script:
+    - git clean -dfx
+    - 'echo "Build opts: ${BUILD_OPTS}"'
+    - meson setup ${BUILD_OPTS} _build
+    - meson compile -C _build
+    - mv _build/doc/libfeedback-0/ _reference/
+  artifacts:
+    paths:
+      - _reference
+
 check-consistency:
-  stage: test
+  stage: test+docs
   extends: .phosh-check-consistency
 
 format-check:
@@ -122,3 +140,16 @@ check-commit-log:
       junit: commit-message-junit-report.xml
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == $CI_DEFAULT_BRANCH'
+
+pages:
+  stage: deploy
+  needs:
+    - build-doc
+  script:
+    - mv _reference/ public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
+
