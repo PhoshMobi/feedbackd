@@ -1,3 +1,14 @@
+feedbackd (0.8.6) experimental; urgency=medium
+
+  * ci: Publish docs
+  * doc: Use gitlab page URL
+  * data: Move udev rule to 72
+    systemd as of 258 requires uaccess tag processing to be < 73.
+    See https://github.com/systemd/systemd/issues/39206#issuecomment-3368532706
+  * packaging: Trigger change event for input subsystem too
+
+ -- Guido Günther <agx@sigxcpu.org>  Sun, 05 Oct 2025 09:15:40 +0200
+
 feedbackd (0.8.5) experimental; urgency=medium
 
   [ Luca Weiss ]

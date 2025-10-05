@@ -24,7 +24,7 @@ case "$1" in
         fi
 
         # we ship udev rules, so trigger an update
-        udevadm trigger --subsystem-match=leds --action=change || true
+        udevadm trigger --subsystem-match=leds --subsystem-match=input --action=change || true
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

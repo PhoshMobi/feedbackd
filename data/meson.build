@@ -68,7 +68,7 @@ if get_option('daemon')
   endif
 
   if get_option('udev')
-    install_data('90-feedbackd.rules', install_dir: udevdir)
+    install_data('72-feedbackd.rules', install_dir: udevdir)
   endif
 
   systemd_user_unit_dir = get_option('systemd_user_unit_dir')

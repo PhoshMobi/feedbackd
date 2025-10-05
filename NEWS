@@ -1,3 +1,10 @@
+feedbackd 0.8.6
+---------------
+Released October 2025
+* Fix compatibility with systemd >= 258
+* Contributors:
+    * Guido Günther
+
 feedbackd 0.8.5
 ---------------
 Released September 2025
