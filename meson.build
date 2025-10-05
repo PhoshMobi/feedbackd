@@ -1,7 +1,7 @@
 project(
   'feedbackd',
   'c',
-  version: '0.8.5',
+  version: '0.8.6',
   license: 'LGPLv3+',
   meson_version: '>= 1.0.0',
   default_options: ['warning_level=1', 'buildtype=debugoptimized', 'c_std=gnu11'],
