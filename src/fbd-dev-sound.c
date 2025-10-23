@@ -199,7 +199,9 @@ on_sound_play_finished_callback (GSoundContext *ctx,
 
 
 gboolean
-fbd_dev_sound_play (FbdDevSound *self, FbdFeedbackSound *feedback, FbdDevSoundPlayedCallback callback)
+fbd_dev_sound_play (FbdDevSound              *self,
+                    FbdFeedbackSound         *feedback,
+                    FbdDevSoundPlayedCallback callback)
 {
   FbdAsyncData *data;
   const char *filename;
