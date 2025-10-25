@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -e
 
 ABS_BUILDDIR='@ABS_BUILDDIR@'
@@ -14,5 +14,7 @@ if [ "${FBD_GDB}" = 1 ]; then
     WRAPPER="gdb --args"
 fi
 
+EXEC=${@:-${ABS_BUILDDIR}/src/feedbackd}
+
 set -x
-exec ${WRAPPER} "$@"
+exec ${WRAPPER} $EXEC

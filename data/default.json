@@ -7,7 +7,8 @@
         {
           "event-name" : "alarm-clock-elapsed",
           "type"       : "Sound",
-          "effect"     : "alarm-clock-elapsed"
+          "effect"     : "alarm-clock-elapsed",
+          "media-role" : "Alarm"
         },
         {
           "event-name" : "button-pressed",
@@ -42,7 +43,8 @@
         {
           "event-name" : "message-new-cellbroadcast",
           "type"       : "Sound",
-          "effect"     : "cellbroadcast"
+          "effect"     : "cellbroadcast",
+          "media-role" : "Emergency"
         },
         {
           "event-name" : "message-new-email",
@@ -62,7 +64,8 @@
         {
           "event-name" : "phone-incoming-call",
           "type"       : "Sound",
-          "effect"     : "phone-incoming-call"
+          "effect"     : "phone-incoming-call",
+          "media-role" : "Ringtone"
         },
         {
           "event-name" : "phone-hangup",

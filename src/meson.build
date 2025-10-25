@@ -1,6 +1,11 @@
 # Feedback daemon
 if get_option('daemon')
 
+  config_h = configuration_data()
+  config_h.set_quoted('PACKAGE_VERSION', meson.project_version())
+  config_h.set('FBD_USE_MEDIA_ROLES', get_option('media-roles'))
+  configure_file(output: 'fbd-config.h', configuration: config_h)
+
   fbd_enum_headers = files('fbd-event.h', 'fbd-feedback-led.h', 'fbd-feedback-vibra.h')
   fbd_enum_sources = gnome.mkenums_simple('fbd-enums', sources: fbd_enum_headers)
 

@@ -91,4 +91,7 @@ if get_option('daemon')
     install_dir: systemd_user_unit_dir,
   )
 
+  if get_option('media-roles')
+    install_data('media-role-nodes.conf', install_dir: wireplumberdir)
+  endif
 endif  # daemon

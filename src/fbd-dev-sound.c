@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2020 Purism SPC
+ *               2025 Phosh.mobi e.V.
  * SPDX-License-Identifier: GPL-3.0+
  * Author: Guido Günther <agx@sigxcpu.org>
  *
@@ -8,6 +9,8 @@
  */
 
 #define G_LOG_DOMAIN "fbd-dev-sound"
+
+#include "fbd-config.h"
 
 #include "fbd-dev-sound.h"
 #include "fbd-feedback-sound.h"
@@ -199,11 +202,13 @@ on_sound_play_finished_callback (GSoundContext *ctx,
 
 
 gboolean
-fbd_dev_sound_play (FbdDevSound *self, FbdFeedbackSound *feedback, FbdDevSoundPlayedCallback callback)
+fbd_dev_sound_play (FbdDevSound              *self,
+                    FbdFeedbackSound         *feedback,
+                    FbdDevSoundPlayedCallback callback)
 {
   FbdAsyncData *data;
   const char *filename;
-  const char *role;
+  const char *role = NULL;
 
   g_return_val_if_fail (FBD_IS_DEV_SOUND (self), FALSE);
   g_return_val_if_fail (GSOUND_IS_CONTEXT (self->ctx), FALSE);
@@ -213,7 +218,9 @@ fbd_dev_sound_play (FbdDevSound *self, FbdFeedbackSound *feedback, FbdDevSoundPl
   if (!g_hash_table_insert (self->playbacks, feedback, data))
     g_warning ("Feedback %p already present", feedback);
 
+#ifdef FBD_USE_MEDIA_ROLES
   role = fbd_feedback_sound_get_media_role (feedback);
+#endif
   if (!role)
     role = "event";
 
