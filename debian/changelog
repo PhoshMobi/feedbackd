@@ -1,3 +1,31 @@
+feedbackd (0.8.7) experimental; urgency=medium
+
+  * build: Rename options file.
+    Bump needed meson version for that
+  * run: Simplify running.
+    We usually want the daemon so default to that when nothing
+    else is passed in.
+  * data: Set suitable media roles for events.
+    Mark alarms, alerts and ring tones.
+  * data: Add media roles configuration.
+    This ensures we properly duck any "multimedia" streams when playing
+    event sounds. We also introduce an alert group for e.g. cell broadcasts.
+    For testing copy to
+      ~/.config/wireplumber/wireplumber.conf.d/media-role-nodes.conf
+    and
+      systemctl --user restart wireplumber
+  * build: Allow to install media roles.
+    Install role based config if set.
+  * dev-sound: Only set media role when role based routing is enabled.
+    This allows to already update the theme without breaking existing installations.
+  * data: Add preferred output targets for alarms and alerts.
+    We usually want them to go to the speaker by default.
+    This needs https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/754
+  * media-roles: Add Phone role.
+    E.g. calls and wys already tag streams with this
+
+ -- Guido Günther <agx@sigxcpu.org>  Sat, 08 Nov 2025 09:44:20 +0100
+
 feedbackd (0.8.6) experimental; urgency=medium
 
   * ci: Publish docs
