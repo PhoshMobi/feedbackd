@@ -17,6 +17,8 @@ SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT}=="1", SUBSYSTEMS=="input", A
 SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT}=="1", SUBSYSTEMS=="input", ATTRS{name}=="pwm-vibrator", TAG+="uaccess", ENV{FEEDBACKD_TYPE}="vibra"
 # Generic regulator-haptic driver
 SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT}=="1", SUBSYSTEMS=="input", ATTRS{name}=="regulator-haptic", TAG+="uaccess", ENV{FEEDBACKD_TYPE}="vibra"
+# Imagis ISA1200 driver (e.g. Google Nexus 10, Samung Note 10.1) (not mainline)
+SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT}=="1", SUBSYSTEMS=="input", ATTRS{name}=="isa1200-haptic", TAG+="uaccess", ENV{FEEDBACKD_TYPE}="vibra"
 # Maxim MAX77693 driver
 SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT}=="1", SUBSYSTEMS=="input", ATTRS{name}=="max77693-haptic", TAG+="uaccess", ENV{FEEDBACKD_TYPE}="vibra"
 # Nokia TWL4030 driver
