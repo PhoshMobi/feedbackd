@@ -19,6 +19,9 @@ option('tests',
 option('systemd_user_unit_dir',
        type: 'string', value: '',
        description: 'Directory for systemd user units')
+option('systemd_sysusers_dir',
+       type: 'string', value: '',
+       description: 'Directory for sysusers configuration')
 option('media-roles',
        type: 'boolean', value: false,
        description: 'Use media roles')
