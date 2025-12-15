@@ -91,6 +91,20 @@ if get_option('daemon')
     install_dir: systemd_user_unit_dir,
   )
 
+  systemd_sysusers_dir = get_option('systemd_sysusers_dir')
+  if systemd_sysusers_dir == ''
+    if systemd_dep.found()
+      systemd_sysusers_dir = systemd_dep.get_variable('sysusersdir')
+    else
+      systemd_sysusers_dir = prefix / libdir / 'sysusers.d'
+    endif
+  endif
+
+  install_data('feedbackd.sysusers',
+    rename: 'feedbackd.conf',
+    install_dir: systemd_sysusers_dir,
+  )
+
   if get_option('media-roles')
     install_data('media-role-nodes.conf', install_dir: wireplumberdir)
   endif
