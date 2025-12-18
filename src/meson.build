@@ -38,7 +38,17 @@ if get_option('daemon')
     'fbd-udev.c',
   ]
 
-  fbd_deps = [gio, gio_unix, glib, gmobile, gobject, gsound, gudev, json_glib]
+  fbd_deps = [
+    gio,
+    gio_unix,
+    glib,
+    gmobile,
+    gobject,
+    gsound,
+    gudev,
+    json_glib,
+    cc.find_library('m', required: false),
+  ]
 
   fbd_inc = [include_directories('.'), libfeedback_inc, dbus_inc]
 
