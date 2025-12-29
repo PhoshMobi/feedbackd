@@ -100,10 +100,7 @@ if get_option('daemon')
     endif
   endif
 
-  install_data('feedbackd.sysusers',
-    rename: 'feedbackd.conf',
-    install_dir: systemd_sysusers_dir,
-  )
+  install_data('feedbackd.sysusers', rename: 'feedbackd.conf', install_dir: systemd_sysusers_dir)
 
   if get_option('media-roles')
     install_data('media-role-nodes.conf', install_dir: wireplumberdir)

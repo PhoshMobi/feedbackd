@@ -329,7 +329,8 @@ fbd_feedback_led_class_init (FbdFeedbackLedClass *klass)
    * FbdFeedbackLed:color:
    *
    * The color the LED should blink with. The color is given as color
-   * name or `rgb()` color value.
+   * name or `rgb()` color value. E.g. a value of "#FF0000" is equivalent
+   * to `red` at maximum brightness.
    */
   props[PROP_COLOR] =
     g_param_spec_string ("color", "", "",

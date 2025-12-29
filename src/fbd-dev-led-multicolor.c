@@ -15,6 +15,8 @@
 
 #include <gio/gio.h>
 
+#include <math.h>
+
 #define LED_MULTI_INDEX_ATTR     "multi_index"
 #define LED_MULTI_INDEX_RED      "red"
 #define LED_MULTI_INDEX_GREEN    "green"
@@ -132,11 +134,14 @@ fbd_dev_led_multicolor_set_color (FbdDevLed           *led,
     colors[priv->green_index] = 0;
     colors[priv->blue_index] = max_brightness;
     break;
-  case FBD_FEEDBACK_LED_COLOR_RGB:
-    colors[priv->red_index] = rgb->r;
-    colors[priv->green_index] = rgb->g;
-    colors[priv->blue_index] = rgb->b;
+  case FBD_FEEDBACK_LED_COLOR_RGB: {
+    float scale = max_brightness / 255.0;
+    /* RGB colors are 0..255 so we need to scale to 0..max_brightness */
+    colors[priv->red_index] = MIN (max_brightness, roundf (rgb->r * scale));
+    colors[priv->green_index] = MIN (max_brightness, roundf (rgb->g * scale));
+    colors[priv->blue_index] = MIN (max_brightness, roundf (rgb->b * scale));
     break;
+  }
   default:
     g_warning("Unhandled color: %d\n", color);
     return FALSE;
