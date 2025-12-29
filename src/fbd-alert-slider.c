@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 The Phosh Developers
+ * Copyright (C) 2024-2025 Phosh.mobi e.V.
  *
  * SPDX-License-Identifier: GPL-3.0+
  *
@@ -50,7 +50,6 @@ GSettings *settings = NULL;
 static void
 set_level (FbdAlertSliderState state, gboolean silent)
 {
-  g_autoptr (LfbEvent) event = NULL;
   const char *profile;
 
   switch (state) {
@@ -71,7 +70,8 @@ set_level (FbdAlertSliderState state, gboolean silent)
   lfb_set_feedback_profile (profile);
 
   if (!silent) {
-    event = lfb_event_new ("button-pressed");
+    g_autoptr (LfbEvent) event = lfb_event_new ("button-pressed");
+
     lfb_event_set_important (event, TRUE);
     lfb_event_set_feedback_profile (event, "quiet");
     lfb_event_trigger_feedback (event, NULL);
@@ -220,7 +220,7 @@ main (int argc, char *argv[])
     { NULL, 0, 0, G_OPTION_ARG_NONE, NULL, NULL, NULL }
   };
 
-  opt_context = g_option_context_new ("- helper to prepare sysfs for feedbackd");
+  opt_context = g_option_context_new ("- support alert slider on OnePlus 6(T)");
   g_option_context_add_main_entries (opt_context, options, NULL);
   if (!g_option_context_parse (opt_context, &argc, &argv, &err)) {
     g_print ("%s", err->message);
