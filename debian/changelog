@@ -1,3 +1,28 @@
+feedbackd (0.8.8) experimental; urgency=medium
+
+  [ Lukas Timmermann ]
+  * 72-feedbackd.rules: Add isa1200 haptics driver
+
+  [ Achill Gilgenast ]
+  * data: Add sysusers configuration.
+    Allows distros to add the feedbackd group by using sd-sysusers.
+    Closes: https://gitlab.freedesktop.org/agx/feedbackd/-/issues/83
+
+  [ Guido Günther ]
+  * packaging: Use dh-sysuser.
+    We can drop adding the group manually. We move the udev triggering
+    to the end to ensure the group is already there.
+  * alert-slider: Minor cleanups.
+    Fix help string and move event into the block it is used in
+  * feedback-led: Document rgb color strings
+  * led-multicolor: Scale to RGB colors to LEDs max brightness.
+    Otherwise we might exceed max brightness and get -EINVAL.
+    Tested-by: Chris Vogel <chris@ween.de>
+    Reported-by: Chris Vogel <chris@ween.de>
+    Closes: https://gitlab.freedesktop.org/agx/feedbackd/-/issues/95
+
+ -- Guido Günther <agx@sigxcpu.org>  Tue, 30 Dec 2025 10:49:55 +0100
+
 feedbackd (0.8.7) experimental; urgency=medium
 
   * build: Rename options file.

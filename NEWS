@@ -1,3 +1,17 @@
+feedbackd 0.8.8
+---------------
+Released December 2025
+* Support haptic on Google Nexus 10, Samung Note 10.1
+* Create uses via systemd-sysusers
+* Fix max brightness for LED patterns on multicolor LEDs
+* Issues fixed:
+    * https://gitlab.freedesktop.org/agx/feedbackd/-/issues/83
+    * https://gitlab.freedesktop.org/agx/feedbackd/-/issues/95
+* Contributors:
+    * Achill Gilgenast
+    * Guido Günther
+    * Lukas Timmermann
+
 feedbackd 0.8.7
 ---------------
 Released November 2025
