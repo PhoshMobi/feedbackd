@@ -12,6 +12,10 @@ ifeq (,$(filter nodoc,$(DEB_BUILD_PROFILES)))
   CONFIGURE_OPTS += -Dgtk_doc=true -Dman=true
 endif
 
+ifneq (,$(filter pkg.feedbackd.media-roles,$(DEB_BUILD_PROFILES)))
+  CONFIGURE_OPTS += -Dmedia-roles=true
+endif
+
 COMMON_PKG=feedbackd-common
 
 docroot := $(CURDIR)/debian/tmp/usr/share/doc/

@@ -111,3 +111,11 @@ Description: GObject introspection data for libfeedback
  .
  This package contains introspection data for the libfeedback library.
 
+Package: wireplumber-xdg-media-roles
+Architecture: all
+Section: sound
+Build-Profiles: <pkg.feedbackd.media-roles>
+Depends:
+ wireplumber (>= 0.5.13),
+Description: Default media role configuration
+ Media role configuration to use role based routing with wireplubmer.
