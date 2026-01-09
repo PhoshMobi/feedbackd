@@ -100,7 +100,7 @@
         {
           "event-name" : "window-close",
           "type"       : "Sound",
-          "effect"     : "theme-demo"
+          "effect"     : "window-close"
         }
       ]
     },
