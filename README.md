@@ -93,17 +93,25 @@ app that triggered them crashes.
 ### Feedback theme
 
 As devices have varying capabilities and users different needs, events
-are mapped to feedbacks (sound, LED, vibra) via a configurable
-theme.
+are mapped to feedbacks (sound, LED, vibra) via a configurable theme.
 
-Feedbackd is shipped with a default theme `default.json`.
-You can add your own themes in multiple ways:
+There are two types of themes: *custom* themes and *device* themes.
+They both use the same format but have different purpose. Custom
+themes are meant to tweak feedbackd's output to the users needs while
+device themes are meant to cater for hardware differences.
+
+#### Custom themes
+
+Feedbackd is shipped with a default theme `default.json`. You can
+replace this by your own, custom theme in multiple ways:
 
 1. By exporting an environment variable `FEEDBACK_THEME` with a path to a
-   valid theme file (not recommended, use for testing only)
+   valid theme file. This is not recommended, use it for testing only.
+
 1. By creating a theme file under `$XDG_CONFIG_HOME/feedbackd/themes/default.json`.
    If `XDG_CONFIG_HOME` environment variable is not set or empty, it will
    default to `$HOME/.config`
+
 1. By creating a theme file under `$XDG_CONFIG_HOME/feedbackd/themes/custom.json` and
    telling feedbackd to use that theme. In this custom theme you only
    specify the events you want to change. Also add a `parent-name` entry
@@ -119,9 +127,9 @@ You can add your own themes in multiple ways:
    }
    ```
 
-   This has the upside that your theme only contains the entries you
-   want to change and that new entries added to the default theme
-   will automatically be used by your theme too. See
+   This has the upside that your theme stays minimal and that new
+   entries added to the default theme will automatically be used by
+   your theme too. See
    [here](./tests/data/user-config/feedbackd/themes/custom.json) for
    an example.
 
@@ -143,53 +151,37 @@ You can add your own themes in multiple ways:
 
    This is the preferred way to specify a custom theme.
 
-1. By adding your theme file to one of the folders in the `XDG_DATA_DIRS`
-   environment variable, appended with `feedbackd/themes/`. This folder isn't
-   created automatically, so you have to create it yourself. Here's an example:
-
-   ```sh
-   # Check which folders are "valid"
-   $ echo $XDG_DATA_DIRS
-   [ ... ]:/usr/local/share:/usr/share
-
-   # Pick a folder that suits you. Note that you shouldn't place themes in
-   # /usr/share, because they would be overwritten by updates!
-   # Create missing directories
-   $ sudo mkdir -p /usr/local/share/feedbackd/themes
-
-   # Add your theme file!
-   $ sudo cp my_awesome_theme.json /usr/local/share/feedbackd/themes/
-   ```
+For available feedback types see the [feedback-themes][](5) manpage.
 
 Upon reception of `SIGHUP` signal, the daemon process will proceed to retrigger
 the above logic to find the themes, and reload the corresponding one. This can
 be used to avoid having to restart the daemon in case of configuration changes.
 
-Check out the companion [feedbackd-device-themes][1] repository for a
-selection of device-specific themes. In order for your theme to be recognized
-it must be named properly. Currently, theme names are based on the `compatible`
-device-tree attribute. You can run the following command to get a list of valid
-filenames for your custom theme (**Note**: You must run this command on the
-device you want to create the theme for!):
+### Device themes
+
+Feedbackd has support to pick up device specific themes
+automatically. This allows us to handle device differences like
+varying strength of haptic motors or different LED colors in an
+automatic way.
+
+Which theme is selected for a device is determined by the device's
+device tree `compatible` as supplied by the kernel. To see the list
+of compatibles of a device use:
 
 ```sh
 cat /sys/firmware/devicetree/base/compatible | tr '\0' "\n"
 ```
 
-Example output (for a Pine64 PinePhone):
+Check out the companion [feedbackd-device-themes][1] repository for
+the current list of device-specific themes we ship by default.
 
-```sh
-$ cat /sys/firmware/devicetree/base/compatible | tr '\0' "\n"
-pine64,pinephone-1.2
-pine64,pinephone
-allwinner,sun50i-a64
-```
+Device specific themes have the same format as custom themes. They
+also use the `parent-name` property to chain up to the default theme
+and only override the events that need adjustment. However the rules
+for finding the device theme in the file system differ.
 
-Thus you could create a custom feedbackd theme for the Pinephone by placing a
-modified theme file in
-`/usr/local/share/feedbackd/themes/pine64,pinephone.json`
-
-If multiple theme files exist, the selection logic follows these steps:
+If multiple device theme files exist, the selection logic follows
+these steps:
 
 1. It picks an identifier from the devicetree, until none are left
 1. It searches through the folders in `XDG_DATA_DIRS` in order of appearance,
@@ -197,9 +189,19 @@ If multiple theme files exist, the selection logic follows these steps:
 1. If a theme file is found in the current location with the current name,
    **it will be chosen** and other themes are ignored.
 
-If no theme file can be found this way (i.e. there are no identifiers and
-folders left to check), `default.json` is chosen instead. Given the above
-examples:
+Example for a Pine64 PinePhone:
+
+```sh
+$ cat /sys/firmware/devicetree/base/compatible | tr '\0' "\n"
+pine64,pinephone-1.2
+pine64,pinephone
+allwinner,sun50i-a64
+
+$ echo $XDG_DATA_DIRS
+/usr/local/share/:/usr/share/
+```
+
+The selection logic would follow these steps:
 
 - `/usr/local/share/feedbackd/themes/pine64,pinephone-1.2.json` takes
   precedence over `/usr/local/share/feedbackd/themes/pine64-pinephone.json`
@@ -207,12 +209,13 @@ examples:
   over `/usr/share/feedbackd/themes/pine64-pinephone-1.2.json`
 - etc...
 
-For available feedback types see the [feedback-themes][](5) manpage.
+if you create or adjust a device theme and consider the changes
+generally useful, please submit them as merge request in the
+[feedbackd-device-themes][1] repository.
 
-You can check the feedback theme and the [feedbackd-themes manpage][]
-for available properties.
+#### Stability guarantees
 
-Note that the feedback theme API (including the theme file format) is
+Note that the feedback theme API, including the theme file format, is
 not stable but considered internal to the daemon.
 
 ### Profiles
