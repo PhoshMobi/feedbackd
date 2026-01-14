@@ -16,7 +16,7 @@ git clone https://gitlab.freedesktop.org/agx/feedbackd
 cd feedbackd
 ```
 
-The master branch has the current development version.
+The `main` branch has the current development version.
 
 ## Dependencies
 
@@ -27,6 +27,8 @@ sudo apt-get -y install build-essential
 sudo apt-get -y build-dep .
 ```
 
+to install the needed build dependencies.
+
 For an explicit list of dependencies check the `Build-Depends` entry in the
 [debian/control][] file.
 
@@ -36,11 +38,21 @@ We use the meson (and thereby Ninja) build system for feedbackd.  The quickest
 way to get going is to do the following:
 
 ```sh
-meson . _build
-ninja -C _build
-ninja -C _build test
-ninja -C _build install
+meson setup _build
+meson compile -C _build
+meson test -C _build
 ```
+
+## Installing
+
+To install the files to `/usr/local` you can use
+
+```
+meson install -C _build
+```
+
+however for testing and development this is usually not necessary as you
+can things out of the built source tree.
 
 ## Running
 
@@ -52,13 +64,13 @@ To run the daemon use
 _build/run _build/src/feedbackd
 ```
 
-To run under gdb use
+To run under `gdb` use
 
 ``` sh
 FBD_GDB=1 _build/run _build/src/feedbackd
 ```
 
-You can introspect and get the current theme with
+You can introspect and get the current profile with
 
 ```sh
 gdbus introspect --session --dest org.sigxcpu.Feedback --object-path /org/sigxcpu/Feedback
@@ -76,41 +88,45 @@ active feedback theme (taking per application profile settings into account).
 
 Any feedback triggered by a client via an event will be stopped latest when the
 client disconnects from DBus. This makes sure all feedbacks get canceled if the
-app that triggered it crashes.
+app that triggered them crashes.
 
 ### Feedback theme
 
 As devices have varying capabilities and users different needs, events
-are mapped to a feedbacks (sound, LED, vibra) via a configurable
+are mapped to feedbacks (sound, LED, vibra) via a configurable
 theme.
 
 Feedbackd is shipped with a default theme `default.json`.
 You can add your own themes in multiple ways:
 
 1. By exporting an environment variable `FEEDBACK_THEME` with a path to a
-   valid theme file (not recommended, use for testing only), or
+   valid theme file (not recommended, use for testing only)
 1. By creating a theme file under `$XDG_CONFIG_HOME/feedbackd/themes/default.json`.
    If `XDG_CONFIG_HOME` environment variable is not set or empty, it will
-   default to `$HOME/.config`, or
-1. By creating a theme file under `$XDG_CONFIG_HOME/feedbackd/themes/custom.json`.
-   You only specify the values you want to change in that theme and add an entry
+   default to `$HOME/.config`
+1. By creating a theme file under `$XDG_CONFIG_HOME/feedbackd/themes/custom.json` and
+   telling feedbackd to use that theme. In this custom theme you only
+   specify the events you want to change. Also add a `parent-name` entry
+   to chain up to the default theme:
 
    ```json
    {
       "name: "custom"
       "parent-name": "default"
       "profiles" : [
-       ...(entries you want to change go here)...
+       ...(events you want to change go here)...
       ]
    }
    ```
 
-   next to the `name` entry in. This has the upside that your theme
-   gets way smaller and that new entries added to the default theme
+   This has the upside that your theme only contains the entries you
+   want to change and that new entries added to the default theme
    will automatically be used by your theme too. See
    [here](./tests/data/user-config/feedbackd/themes/custom.json) for
-   an example. Once you have the file in place, tell feedbackd the
-   them you want to use:
+   an example.
+
+   Once you have the file in place, tell feedbackd to use this theme
+   instead of the default one:
 
    ```sh
    gsettings set org.sigxcpu.feedbackd theme custom
@@ -123,8 +139,9 @@ You can add your own themes in multiple ways:
    ```
 
    Note that you can name your theme as you wish but avoid theme names
-   starting with `__` or `$` as this namespace is reserved. This is the
-   preferred way to specify a custom theme.
+   starting with `__` or `$` as this namespace is reserved.
+
+   This is the preferred way to specify a custom theme.
 
 1. By adding your theme file to one of the folders in the `XDG_DATA_DIRS`
    environment variable, appended with `feedbackd/themes/`. This folder isn't
@@ -190,12 +207,13 @@ examples:
   over `/usr/share/feedbackd/themes/pine64-pinephone-1.2.json`
 - etc...
 
-For available feeddback types see the [feedback-themes][](5) manpage.
+For available feedback types see the [feedback-themes][](5) manpage.
 
 You can check the feedback theme and the [feedbackd-themes manpage][]
-or available properties. Note that the feedback theme API (including
-the theme file format) is not stable but considered internal to the
-daemon.
+for available properties.
+
+Note that the feedback theme API (including the theme file format) is
+not stable but considered internal to the daemon.
 
 ### Profiles
 
