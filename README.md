@@ -263,7 +263,8 @@ not stable but considered internal to the daemon.
 
 ## fbcli
 
-`fbcli` can be used to trigger feedback for different events. Here are some examples:
+`fbcli` is a command line tool that can be used to trigger feedback
+for different events. Here are some examples:
 
 ### Phone call
 
