@@ -19,7 +19,7 @@
 #include <glib-unix.h>
 
 static GMainLoop *loop;
-
+static gboolean name_acquired;
 
 static GDebugKey debug_keys[] =
 {
@@ -89,6 +89,7 @@ name_acquired_cb (GDBusConnection *connection,
                   gpointer         user_data)
 {
   g_debug ("Service name '%s' was acquired", name);
+  name_acquired = TRUE;
 }
 
 static void
@@ -96,18 +97,28 @@ name_lost_cb (GDBusConnection *connection,
               const gchar     *name,
               gpointer         user_data)
 {
-  /* Note that we're not allowing replacement, so once the name acquired, the
-   * process won't lose it. */
+  int *ret = user_data;
+
   if (!name) {
     g_warning ("Could not get the session bus. Make sure "
                "the message bus daemon is running!");
-  } else {
-    if (connection)
-      g_warning ("Could not acquire the '%s' service name", name);
-    else
-      g_debug ("DBus connection close");
+    *ret = EXIT_FAILURE;
+    goto out;
   }
 
+  if (!connection) {
+    g_debug ("DBus connection close");
+    goto out;
+  }
+
+  if (name_acquired) {
+    g_message ("Name lost");
+  } else {
+    g_warning ("Could not acquire the '%s' service name", name);
+    *ret = EXIT_FAILURE;
+  }
+
+out:
   g_main_loop_quit (loop);
 }
 
@@ -119,6 +130,7 @@ main (int argc, char *argv[])
   gboolean opt_verbose = FALSE, opt_replace = FALSE;
   g_autoptr (GOptionContext) opt_context = NULL;
   g_autoptr (FbdFeedbackManager) manager = NULL;
+  gboolean ret = EXIT_SUCCESS;
   const char *debugenv;
   GOptionEntry options[] = {
     { "verbose", 'v', 0, G_OPTION_ARG_NONE, &opt_verbose,
@@ -159,9 +171,11 @@ main (int argc, char *argv[])
                   bus_acquired_cb,
                   name_acquired_cb,
                   name_lost_cb,
-                  NULL,
+                  &ret,
                   NULL);
 
   g_main_loop_run (loop);
   g_main_loop_unref (loop);
+
+  return ret;
 }
