@@ -1,12 +1,17 @@
 # Theme based Haptic, Visual and Audio Feedback
 
-feedbackd provides a DBus daemon (feedbackd) to act on events to provide
-haptic, visual and audio feedback. It offers a library (libfeedback) and
-GObject introspection bindings to ease using it from applications.
+feebackd provides a DBus daemon (feebackd) to act on events to provide
+haptic, visual and audio feedback. It offers a library
+([libfeedback][libfeedback-api]) and GObject introspection bindings to
+ease using it from applications.
+
+It provides a reference implementation for the [Feedback theme
+specification][theme-spec] and [Event naming
+specification][event-spec].
 
 ## License
 
-feedbackd is licensed under the GPLv3+ while the libfeedback library is
+feebackd is licensed under the GPLv3+ while the libfeedback library is
 licensed under LGPL 2.1+.
 
 ## Getting the source
@@ -34,7 +39,7 @@ For an explicit list of dependencies check the `Build-Depends` entry in the
 
 ## Building
 
-We use the meson (and thereby Ninja) build system for feedbackd.  The quickest
+We use the meson (and thereby Ninja) build system for feebackd.  The quickest
 way to get going is to do the following:
 
 ```sh
@@ -70,7 +75,7 @@ To run under `gdb` use
 FBD_GDB=1 _build/run _build/src/feedbackd
 ```
 
-You can introspect and get the current profile with
+You can introspect and get the current maximum profile with
 
 ```sh
 gdbus introspect --session --dest org.sigxcpu.Feedback --object-path /org/sigxcpu/Feedback
@@ -80,29 +85,58 @@ To run feedback for an event, use [fbcli](#fbcli)
 
 See `examples/` for a simple python example using GObject introspection.
 
-## How it works
+## Events, Feedbacks and Profiles
 
-Whenever an event is submitted to the daemon by a client via the DBus API *feedbackd*
-looks up the corresponding feedbacks according to the current profile in the currently
-active feedback theme (taking per application profile settings into account).
+Whenever an event is submitted to the daemon by a client via the DBus
+API *feebackd* looks up the corresponding feedbacks in the profiles
+of the currently active feedback theme. Which feedbacks are actually
+triggered depends on the daemon's current *feedback* *level*, per
+application settings and hints provided by the client with the event.
+A feedback can be a sound played, a vibra rumble or a LED blinking
+with a given pattern.
 
-Any feedback triggered by a client via an event will be stopped latest when the
-client disconnects from DBus. This makes sure all feedbacks get canceled if the
-app that triggered them crashes.
+Any feedback triggered by a client via an event will be stopped latest
+when the client disconnects from DBus. This makes sure all feedbacks
+get canceled if the app that triggered them crashes.
 
-### Feedback theme
+### Profiles
+
+Each theme consists of up to three profile sections named `full`,
+`quiet` and `silent` containing event names and their associated
+feedback. feebackd's currently selected profile determines which
+profiles of the current theme are being used for event lookup:
+
+- `full`: Use events from the `full`, `quiet` and `silent` profiles of
+  the current feedback theme.
+- `quiet`: Use events from the `quiet` and `silent` profiles of the
+  current feedback theme. This usually means haptic and LED but no
+  sound feedback.
+- `silent`: Only use the `silent` profile from the current feedback
+  theme. This usually means LED but no sound or vibra feedback.
+
+The daemon's current profile can be changed via a GSetting:
+
+```sh
+gsettings set org.sigxcpu.feedbackd profile full
+```
+
+As the daemon's current profile value sets an upper limit of the used
+profiles of a theme it is called the *feedback* *level*. See the
+[Theme spec][theme-spec] for further details.
+
+### Feedback themes
 
 As devices have varying capabilities and users different needs, events
 are mapped to feedbacks (sound, LED, vibra) via a configurable theme.
 
 There are two types of themes: *custom* themes and *device* themes.
 They both use the same format but have different purpose. Custom
-themes are meant to tweak feedbackd's output to the users needs while
+themes are meant to tweak feebackd's output to the users needs while
 device themes are meant to cater for hardware differences.
 
 #### Custom themes
 
-Feedbackd is shipped with a default theme `default.json`. You can
+feebackd is shipped with a default theme `default.json`. You can
 replace this by your own, custom theme in multiple ways:
 
 1. By exporting an environment variable `FEEDBACK_THEME` with a path to a
@@ -113,7 +147,7 @@ replace this by your own, custom theme in multiple ways:
    default to `$HOME/.config`
 
 1. By creating a theme file under `$XDG_CONFIG_HOME/feedbackd/themes/custom.json` and
-   telling feedbackd to use that theme. In this custom theme you only
+   telling feebackd to use that theme. In this custom theme you only
    specify the events you want to change. Also add a `parent-name` entry
    to chain up to the default theme:
 
@@ -133,7 +167,7 @@ replace this by your own, custom theme in multiple ways:
    [here](./tests/data/user-config/feedbackd/themes/custom.json) for
    an example.
 
-   Once you have the file in place, tell feedbackd to use this theme
+   Once you have the file in place, tell feebackd to use this theme
    instead of the default one:
 
    ```sh
@@ -159,7 +193,7 @@ be used to avoid having to restart the daemon in case of configuration changes.
 
 ### Device themes
 
-Feedbackd has support to pick up device specific themes
+feebackd has support to pick up device specific themes
 automatically. This allows us to handle device differences like
 varying strength of haptic motors or different LED colors in an
 automatic way.
@@ -226,23 +260,6 @@ generally useful, please submit them as merge request in the
 
 Note that the feedback theme API, including the theme file format, is
 not stable but considered internal to the daemon.
-
-### Profiles
-
-The profile determines which parts of the theme are in use:
-
-- `full`: Use configured events from the `full`, `quiet` and `silent` parts of
-  the feedback them.
-- `quiet`: Use `quiet` and `silent` part from of the feedback theme. This usually
-  means no audio feedback.
-- `silent`: Only use the `silent` part from the feedback theme. This usually means
-  to not use audio or vibra.
-
-It can be set via a GSetting
-
-```sh
-  gsettings set org.sigxcpu.feedbackd profile full
-```
 
 ## fbcli
 
@@ -328,20 +345,20 @@ a haptic device is found.
 ## Getting in Touch
 
 - Issue tracker: <https://gitlab.freedesktop.org/agx/feedbackd/-/issues>
-- Matrix: <https://matrix.to/#/#phosh:phosh.mobi>
+- Chat via Matrix: <https://matrix.to/#/#phosh:phosh.mobi>
 
 ## Code of Conduct
 
-Note that as a project hosted on freedesktop.org, feedbackd follows its
+Note that since feedbackd is hosted on freedesktop.org, feebackd follows its
 [Code of Conduct], based on the Contributor Covenant. Please conduct yourself
 in a respectful and civilized manner when communicating with community members
 on IRC and bug tracker.
 
 ## Documentation
 
-- [Libfeedback API](https://feedbackd-b29738.pages.freedesktop.org/)
-- [Event naming spec draft](./doc/Event-naming-spec-0.0.0.md)
-- [Feedback-theme-spec draft](./doc/Feedback-theme-spec-0.0.0.md)
+- [Libfeedback API][libfeedback-api]
+- [Event naming spec draft][event-spec]
+- [Feedback-theme-spec draft][theme-spec]
 - [W3's vibration API draft](https://www.w3.org/TR/vibration/)
 
 [debian/control]: ./debian/control#L5
@@ -349,3 +366,6 @@ on IRC and bug tracker.
 [feedback-themes]: ./doc/feedback-themes.rst
 [Code of Conduct]: https://www.freedesktop.org/wiki/CodeOfConduct/
 [feedbackd-themes manpage]: ./doc/feedbackd-themes.rst
+[event-spec]: ./doc/Event-naming-spec-0.0.0.md
+[theme-spec]: ./doc/Feedback-theme-spec-0.0.0.md
+[libfeedback-api]: https://feedbackd-b29738.pages.freedesktop.org/
