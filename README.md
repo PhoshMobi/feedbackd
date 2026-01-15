@@ -178,7 +178,16 @@ the current list of device-specific themes we ship by default.
 Device specific themes have the same format as custom themes. They
 also use the `parent-name` property to chain up to the default theme
 and only override the events that need adjustment. However the rules
-for finding the device theme in the file system differ.
+for finding the device theme in the file system differ and device
+themes always have the `name` property set to `$device`. The simplest
+device theme, doing nothing looks like:
+
+```json
+{
+  "name" : "$device",
+  "parent-name": "default"
+}
+```
 
 If multiple device theme files exist, the selection logic follows
 these steps:
@@ -201,7 +210,7 @@ $ echo $XDG_DATA_DIRS
 /usr/local/share/:/usr/share/
 ```
 
-The selection logic would follow these steps:
+The above selection logic would look at these concrete locations:
 
 - `/usr/local/share/feedbackd/themes/pine64,pinephone-1.2.json` takes
   precedence over `/usr/local/share/feedbackd/themes/pine64-pinephone.json`
@@ -209,7 +218,7 @@ The selection logic would follow these steps:
   over `/usr/share/feedbackd/themes/pine64-pinephone-1.2.json`
 - etc...
 
-if you create or adjust a device theme and consider the changes
+If you create or adjust a device theme and consider the changes
 generally useful, please submit them as merge request in the
 [feedbackd-device-themes][1] repository.
 
