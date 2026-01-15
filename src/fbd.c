@@ -1,6 +1,9 @@
 /*
  * Copyright (C) 2020 Purism SPC
+ *               2023-2026 Phosh.mobi e.V.
+ *
  * SPDX-License-Identifier: GPL-3.0+
+ *
  * Author: Guido Günther <agx@sigxcpu.org>
  */
 
@@ -112,17 +115,27 @@ name_lost_cb (GDBusConnection *connection,
 int
 main (int argc, char *argv[])
 {
-  g_autoptr(GError) err = NULL;
-  g_autoptr(GOptionContext) opt_context = NULL;
+  g_autoptr (GError) err = NULL;
+  gboolean opt_verbose = FALSE;
+  g_autoptr (GOptionContext) opt_context = NULL;
   g_autoptr (FbdFeedbackManager) manager = NULL;
   const char *debugenv;
+  GOptionEntry options[] = {
+    { "verbose", 'v', 0, G_OPTION_ARG_NONE, &opt_verbose,
+    "Print debug information during command processing", NULL },
+    { NULL }
+  };
 
   opt_context = g_option_context_new ("- A daemon to trigger event feedback");
+  g_option_context_add_main_entries (opt_context, options, NULL);
   if (!g_option_context_parse (opt_context, &argc, &argv, &err)) {
     g_warning ("%s", err->message);
     g_clear_error (&err);
     return 1;
   }
+
+  if (opt_verbose)
+    g_log_writer_default_set_debug_domains ((const char *const[]){ "all", NULL });
 
   debugenv = g_getenv ("FEEDBACKD_DEBUG");
   fbd_debug_flags = g_parse_debug_string (debugenv,

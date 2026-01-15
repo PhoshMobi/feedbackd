@@ -38,6 +38,9 @@ Options
 ``-h``, ``--help``
    print help and exit
 
+``-v``, ``--verbose``
+   print verbose  information
+
 Configuration
 =============
 
