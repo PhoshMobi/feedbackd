@@ -116,13 +116,14 @@ int
 main (int argc, char *argv[])
 {
   g_autoptr (GError) err = NULL;
-  gboolean opt_verbose = FALSE;
+  gboolean opt_verbose = FALSE, opt_replace = FALSE;
   g_autoptr (GOptionContext) opt_context = NULL;
   g_autoptr (FbdFeedbackManager) manager = NULL;
   const char *debugenv;
   GOptionEntry options[] = {
     { "verbose", 'v', 0, G_OPTION_ARG_NONE, &opt_verbose,
-    "Print debug information during command processing", NULL },
+      "Print debug information during command processing", NULL },
+    { "replace", 'r', 0, G_OPTION_ARG_NONE, &opt_replace, "Replace a running instance", NULL },
     { NULL }
   };
 
@@ -153,7 +154,8 @@ main (int argc, char *argv[])
 
   g_bus_own_name (FB_DBUS_TYPE,
                   FB_DBUS_NAME,
-                  G_BUS_NAME_OWNER_FLAGS_NONE,
+                  G_BUS_NAME_OWNER_FLAGS_ALLOW_REPLACEMENT |
+                  (opt_replace ? G_BUS_NAME_OWNER_FLAGS_REPLACE : 0),
                   bus_acquired_cb,
                   name_acquired_cb,
                   name_lost_cb,

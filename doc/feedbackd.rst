@@ -41,6 +41,9 @@ Options
 ``-v``, ``--verbose``
    print verbose  information
 
+``-r``, ``--replace``
+   replace a running instance
+
 Configuration
 =============
 
