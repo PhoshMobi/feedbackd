@@ -44,6 +44,9 @@ Options
 ``-r``, ``--replace``
    replace a running instance
 
+``--version``
+   print version and exit
+
 Configuration
 =============
 

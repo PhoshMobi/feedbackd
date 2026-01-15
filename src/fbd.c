@@ -9,6 +9,8 @@
 
 #define G_LOG_DOMAIN "fbd"
 
+#include "fbd-config.h"
+
 #include "fbd.h"
 #include "fbd-feedback-manager.h"
 #include "fbd-haptic-manager.h"
@@ -127,7 +129,7 @@ int
 main (int argc, char *argv[])
 {
   g_autoptr (GError) err = NULL;
-  gboolean opt_verbose = FALSE, opt_replace = FALSE;
+  gboolean opt_verbose = FALSE, opt_replace = FALSE, opt_version = FALSE;
   g_autoptr (GOptionContext) opt_context = NULL;
   g_autoptr (FbdFeedbackManager) manager = NULL;
   gboolean ret = EXIT_SUCCESS;
@@ -136,6 +138,7 @@ main (int argc, char *argv[])
     { "verbose", 'v', 0, G_OPTION_ARG_NONE, &opt_verbose,
       "Print debug information during command processing", NULL },
     { "replace", 'r', 0, G_OPTION_ARG_NONE, &opt_replace, "Replace a running instance", NULL },
+    { "version", 0, 0, G_OPTION_ARG_NONE, &opt_version, "Print program version", NULL },
     { NULL }
   };
 
@@ -145,6 +148,11 @@ main (int argc, char *argv[])
     g_warning ("%s", err->message);
     g_clear_error (&err);
     return 1;
+  }
+
+  if (opt_version) {
+    g_print (PACKAGE_NAME " " PACKAGE_VERSION "\n");
+    return EXIT_SUCCESS;
   }
 
   if (opt_verbose)
