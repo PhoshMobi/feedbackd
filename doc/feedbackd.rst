@@ -38,6 +38,15 @@ Options
 ``-h``, ``--help``
    print help and exit
 
+``-v``, ``--verbose``
+   print verbose  information
+
+``-r``, ``--replace``
+   replace a running instance
+
+``--version``
+   print version and exit
+
 Configuration
 =============
 

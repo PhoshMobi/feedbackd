@@ -1,10 +1,15 @@
 /*
  * Copyright (C) 2020 Purism SPC
+ *               2023-2026 Phosh.mobi e.V.
+ *
  * SPDX-License-Identifier: GPL-3.0+
+ *
  * Author: Guido Günther <agx@sigxcpu.org>
  */
 
 #define G_LOG_DOMAIN "fbd"
+
+#include "fbd-config.h"
 
 #include "fbd.h"
 #include "fbd-feedback-manager.h"
@@ -16,7 +21,7 @@
 #include <glib-unix.h>
 
 static GMainLoop *loop;
-
+static gboolean name_acquired;
 
 static GDebugKey debug_keys[] =
 {
@@ -82,29 +87,40 @@ bus_acquired_cb (GDBusConnection *connection,
 
 static void
 name_acquired_cb (GDBusConnection *connection,
-                  const gchar *name,
-                  gpointer user_data)
+                  const gchar     *name,
+                  gpointer         user_data)
 {
   g_debug ("Service name '%s' was acquired", name);
+  name_acquired = TRUE;
 }
 
 static void
 name_lost_cb (GDBusConnection *connection,
-              const gchar *name,
-              gpointer user_data)
+              const gchar     *name,
+              gpointer         user_data)
 {
-  /* Note that we're not allowing replacement, so once the name acquired, the
-   * process won't lose it. */
+  int *ret = user_data;
+
   if (!name) {
     g_warning ("Could not get the session bus. Make sure "
                "the message bus daemon is running!");
-  } else {
-    if (connection)
-      g_warning ("Could not acquire the '%s' service name", name);
-    else
-      g_debug ("DBus connection close");
+    *ret = EXIT_FAILURE;
+    goto out;
   }
 
+  if (!connection) {
+    g_debug ("DBus connection close");
+    goto out;
+  }
+
+  if (name_acquired) {
+    g_message ("Name lost");
+  } else {
+    g_warning ("Could not acquire the '%s' service name", name);
+    *ret = EXIT_FAILURE;
+  }
+
+out:
   g_main_loop_quit (loop);
 }
 
@@ -112,17 +128,35 @@ name_lost_cb (GDBusConnection *connection,
 int
 main (int argc, char *argv[])
 {
-  g_autoptr(GError) err = NULL;
-  g_autoptr(GOptionContext) opt_context = NULL;
+  g_autoptr (GError) err = NULL;
+  gboolean opt_verbose = FALSE, opt_replace = FALSE, opt_version = FALSE;
+  g_autoptr (GOptionContext) opt_context = NULL;
   g_autoptr (FbdFeedbackManager) manager = NULL;
+  gboolean ret = EXIT_SUCCESS;
   const char *debugenv;
+  GOptionEntry options[] = {
+    { "verbose", 'v', 0, G_OPTION_ARG_NONE, &opt_verbose,
+      "Print debug information during command processing", NULL },
+    { "replace", 'r', 0, G_OPTION_ARG_NONE, &opt_replace, "Replace a running instance", NULL },
+    { "version", 0, 0, G_OPTION_ARG_NONE, &opt_version, "Print program version", NULL },
+    { NULL }
+  };
 
   opt_context = g_option_context_new ("- A daemon to trigger event feedback");
+  g_option_context_add_main_entries (opt_context, options, NULL);
   if (!g_option_context_parse (opt_context, &argc, &argv, &err)) {
     g_warning ("%s", err->message);
     g_clear_error (&err);
     return 1;
   }
+
+  if (opt_version) {
+    g_print (PACKAGE_NAME " " PACKAGE_VERSION "\n");
+    return EXIT_SUCCESS;
+  }
+
+  if (opt_verbose)
+    g_log_writer_default_set_debug_domains ((const char *const[]){ "all", NULL });
 
   debugenv = g_getenv ("FEEDBACKD_DEBUG");
   fbd_debug_flags = g_parse_debug_string (debugenv,
@@ -140,13 +174,16 @@ main (int argc, char *argv[])
 
   g_bus_own_name (FB_DBUS_TYPE,
                   FB_DBUS_NAME,
-                  G_BUS_NAME_OWNER_FLAGS_NONE,
+                  G_BUS_NAME_OWNER_FLAGS_ALLOW_REPLACEMENT |
+                  (opt_replace ? G_BUS_NAME_OWNER_FLAGS_REPLACE : 0),
                   bus_acquired_cb,
                   name_acquired_cb,
                   name_lost_cb,
-                  NULL,
+                  &ret,
                   NULL);
 
   g_main_loop_run (loop);
   g_main_loop_unref (loop);
+
+  return ret;
 }
