@@ -17,17 +17,24 @@ currently active feedback theme.
 Each theme consists of up to three profile sections named `full`,
 `quiet` and `silent` containing event names and their associated
 feedback. They can reference another theme via the `parent-name`
-element to avoid repetition.
+element to avoid repetition. If an event received by the daemon is not
+present in the currently active theme or its parent theme it will be
+ignored.
 
-The events in the theme are named according to the
+Each event maps to at most one feedback in each profile. The events
+in the theme are named according to the
 `Event Naming Specifiaction
-<https://gitlab.freedesktop.org/agx/feedbackd/-/blob/main/doc/Event-naming-spec-0.0.0.md>`_
+<https://gitlab.freedesktop.org/agx/feedbackd/-/blob/main/doc/Event-naming-spec-0.0.0.md>`_.
 
-Feedback themes use a JSON format that can be validated with
+There are two types of themes: *custom* themes and *device* themes.
+They both use the same format but have different purpose. Custom
+themes are meant to tweak feebackd's output to the user's needs while
+device themes are meant to cater for hardware differences. Feedback
+themes use a JSON format that can be validated with
 ``fbd-theme-validate(1)``.
 
 For details on how to create or modify feedback themes see
-``feedbackd's documentation`` at https://gitlab.freedesktop.org/agx/feedbackd#feedback-theme
+``feedbackd's documentation`` at https://gitlab.freedesktop.org/agx/feedbackd#feedback-theme.
 
 Feedback types
 --------------
@@ -49,7 +56,7 @@ are described in the ``Sound theme spec`` at https://freedesktop.org/wiki/Specif
 - `event-name`: The sound event name to use.
 - `media-role`: The media role to set played audio stream. Defaults to `event`.
 
-`Sound` feedback is usually used in the `full` profile section of the the theme only.
+`Sound` feedback is usually used in the `full` profile section of the theme only.
 
 VibraRumble feedback
 ~~~~~~~~~~~~~~~~~~~~
@@ -61,7 +68,7 @@ The `VibraRumble` feedback uses a single property
 - `duration`: The duration of the rumble in ms.
 - `mangitude`: The relative magnitude of the rumble (``[0, 1]``).
 
-`VibraRumble` feedback is usually used in the `quiet` profile section of the the theme only.
+`VibraRumble` feedback is usually used in the `quiet` profile section of the theme only.
 
 VibraPattern feedback
 ~~~~~~~~~~~~~~~~~~~~~
@@ -85,7 +92,7 @@ The `Led` feedback type uses two properties to specify the way a LED blinks.
   each component. E.g. `#00FFFF` corresponds to cyan color.
 - `frequency`: The LEDs blinkinig frequency in mHz.
 
-`Led` feedback is usually used in the `silent` profile section of the the theme only.
+`Led` feedback is usually used in the `silent` profile section of the theme only.
 
 See also
 ========
