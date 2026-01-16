@@ -82,16 +82,16 @@ bus_acquired_cb (GDBusConnection *connection,
 
 static void
 name_acquired_cb (GDBusConnection *connection,
-                  const gchar *name,
-                  gpointer user_data)
+                  const gchar     *name,
+                  gpointer         user_data)
 {
   g_debug ("Service name '%s' was acquired", name);
 }
 
 static void
 name_lost_cb (GDBusConnection *connection,
-              const gchar *name,
-              gpointer user_data)
+              const gchar     *name,
+              gpointer         user_data)
 {
   /* Note that we're not allowing replacement, so once the name acquired, the
    * process won't lose it. */
