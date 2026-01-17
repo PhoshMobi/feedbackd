@@ -37,7 +37,7 @@ SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT}=="1", SUBSYSTEMS=="input", A
 #
 # Status LEDs
 SUBSYSTEM=="leds", DEVPATH=="*/*:status", ENV{FEEDBACKD_TYPE}="led", RUN{builtin}+="kmod load ledtrig-pattern", RUN+="/usr/libexec/fbd-ledctrl -p %S%p -t pattern -G feedbackd"
-SUBSYSTEM=="leds", DEVPATH=="*/*:status-[[:digit:]]", ENV{FEEDBACKD_TYPE}="led", RUN{builtin}+="kmod load ledtrig-pattern", RUN+="/usr/libexec/fbd-ledctrl -p %S%p -t pattern -G feedbackd"
+SUBSYSTEM=="leds", DEVPATH=="*/*:status-[0-9]*", ENV{FEEDBACKD_TYPE}="led", RUN{builtin}+="kmod load ledtrig-pattern", RUN+="/usr/libexec/fbd-ledctrl -p %S%p -t pattern -G feedbackd"
 SUBSYSTEM=="leds", DEVPATH=="*/*:indicator", ENV{FEEDBACKD_TYPE}="led", RUN{builtin}+="kmod load ledtrig-pattern", RUN+="/usr/libexec/fbd-ledctrl -p %S%p -t pattern -G feedbackd"
 # Camera Flash
 SUBSYSTEM=="leds", DEVPATH=="*/*:flash", ENV{FEEDBACKD_TYPE}="led", RUN{builtin}+="kmod load ledtrig-pattern", RUN+="/usr/libexec/fbd-ledctrl -p %S%p -t pattern -G feedbackd"
