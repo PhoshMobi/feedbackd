@@ -153,8 +153,8 @@ replace this by your own, custom theme in multiple ways:
 
    ```json
    {
-      "name: "custom"
-      "parent-name": "default"
+      "name": "custom",
+      "parent-name": "default",
       "profiles" : [
        ...(events you want to change go here)...
       ]
