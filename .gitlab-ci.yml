@@ -1,7 +1,7 @@
 ---
 include:
   - remote: 'https://gitlab.freedesktop.org/freedesktop/ci-templates/-/raw/6a40df92957c8ce9ee741aaccc5daaaf70545b1e/templates/ci-fairy.yml'
-  - remote: 'https://gitlab.gnome.org/guidog/meta-phosh/-/raw/0ed15edd821f8afacbf7a9c0f2a6266873289115/ci/phosh-common-jobs.yml'
+  - remote: 'https://gitlab.gnome.org/World/Phosh/meta-phosh/-/raw/fe94386c4e4f088e96955194cb9d405df0654563/ci/phosh-common-jobs.yml'
 
 stages:
   - build
