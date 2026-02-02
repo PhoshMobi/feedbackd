@@ -153,8 +153,8 @@ replace this by your own, custom theme in multiple ways:
 
    ```json
    {
-      "name: "custom"
-      "parent-name": "default"
+      "name": "custom",
+      "parent-name": "default",
       "profiles" : [
        ...(events you want to change go here)...
       ]
@@ -183,7 +183,13 @@ replace this by your own, custom theme in multiple ways:
    Note that you can name your theme as you wish but avoid theme names
    starting with `__` or `$` as this namespace is reserved.
 
-   This is the preferred way to specify a custom theme.
+   This is the preferred way to specify a custom theme. See [examples/strict.json][]
+   for a minimal example that you can copy to `~/.config/feedbackd/themes/`
+   and enable via
+
+   ```sh
+   gsettings set org.sigxcpu.feedbackd theme strict
+   ```
 
 For available feedback types see the [feedback-themes][](5) manpage.
 
@@ -370,3 +376,4 @@ on IRC and bug tracker.
 [event-spec]: ./doc/Event-naming-spec-0.0.0.md
 [theme-spec]: ./doc/Feedback-theme-spec-0.0.0.md
 [libfeedback-api]: https://feedbackd-b29738.pages.freedesktop.org/
+[examples/strict.json]: ./examples/strict.json
