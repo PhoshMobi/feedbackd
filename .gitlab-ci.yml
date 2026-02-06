@@ -11,6 +11,8 @@ stages:
 
 variables:
   FDO_UPSTREAM_REPO: agx/feedbackd
+  # ci-check image comes from here
+  CI_REGISTRY: registry.gitlab.gnome.org
 
 workflow:
   rules:
