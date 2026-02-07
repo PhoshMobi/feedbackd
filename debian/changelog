@@ -1,3 +1,40 @@
+feedbackd (0.8.9) experimental; urgency=medium
+
+  [ Guido Günther ]
+  * packaging: Add build profile to build with and install media roles.
+    We create an wireplumber-xdg-media-roles package that contains the role configuration.
+  * theme: Fix window-close event name
+  * doc: Update build instructions.
+    We use meson and also tweak some other bits for readability
+  * doc: Better separate custom and device themes
+  * doc: Document `$device` in device themes.
+    It identifies the theme as device theme so we should document it.
+  * feedback-themes: Mention the profiles feedback types are used in
+  * doc: Clarify event lookup
+  * doc: Mention what fbcli is
+  * feedback-themes: Improve manpage.
+    Explain relation between profiles, events and feedback a bit better.
+  * feedbackd: Add --verbose option.
+    Easier to discover than `G_MESSAGES_DEBUG`
+  * feedbackd: Allow replacement and an option for it.
+    This brings us in line with e.g. the portals
+  * feedbackd: Exit with EXIT_FAILURE if we can't get the bus name.
+    Makes usage in scritps and systemd units more robust.
+  * feedbackd: Add --version option
+  * examples: Add a less blinky example.
+    Uncategorized notifications can be distracting. Add an example that
+    disable the notification LED for these. Copy to
+    ~/.config/feedbackd/themes/
+    and enable via
+    gsettings set org.sigxcpu.feedbackd theme strict
+  * ci: Update URL to shared repo
+
+  [ stsdc ]
+  * udev: Match on devices with multiple status LEDs
+  * rules: Update regex for status LED device path
+
+ -- Guido Günther <agx@sigxcpu.org>  Fri, 06 Feb 2026 20:23:49 +0100
+
 feedbackd (0.8.8) experimental; urgency=medium
 
   [ Lukas Timmermann ]

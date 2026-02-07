@@ -1,3 +1,15 @@
+feedbackd 0.8.9
+---------------
+Released February 2026
+* Impreove docs
+* Add custom theme example
+* udev: Match LED on devices with multiple status LEDs
+* Simplify using media roles via build profile
+* theme: Fix window-close event name
+* Contributors:
+    * Guido Günther
+    * stsdc
+
 feedbackd 0.8.8
 ---------------
 Released December 2025
