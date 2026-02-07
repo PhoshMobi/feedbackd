@@ -28,7 +28,7 @@ in the theme are named according to the
 
 There are two types of themes: *custom* themes and *device* themes.
 They both use the same format but have different purpose. Custom
-themes are meant to tweak feebackd's output to the user's needs while
+themes are meant to tweak feedbackd's output to the user's needs while
 device themes are meant to cater for hardware differences. Feedback
 themes use a JSON format that can be validated with
 ``fbd-theme-validate(1)``.

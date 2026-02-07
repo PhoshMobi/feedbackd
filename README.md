@@ -1,6 +1,6 @@
 # Theme based Haptic, Visual and Audio Feedback
 
-feebackd provides a DBus daemon (feebackd) to act on events to provide
+feedbackd provides a DBus daemon (feedbackd) to act on events to provide
 haptic, visual and audio feedback. It offers a library
 ([libfeedback][libfeedback-api]) and GObject introspection bindings to
 ease using it from applications.
@@ -11,7 +11,7 @@ specification][event-spec].
 
 ## License
 
-feebackd is licensed under the GPLv3+ while the libfeedback library is
+feedbackd is licensed under the GPLv3+ while the libfeedback library is
 licensed under LGPL 2.1+.
 
 ## Getting the source
@@ -39,7 +39,7 @@ For an explicit list of dependencies check the `Build-Depends` entry in the
 
 ## Building
 
-We use the meson (and thereby Ninja) build system for feebackd.  The quickest
+We use the meson (and thereby Ninja) build system for feedbackd. The quickest
 way to get going is to do the following:
 
 ```sh
@@ -88,7 +88,7 @@ See `examples/` for a simple python example using GObject introspection.
 ## Events, Feedbacks and Profiles
 
 Whenever an event is submitted to the daemon by a client via the DBus
-API *feebackd* looks up the corresponding feedbacks in the profiles
+API *feedbackd* looks up the corresponding feedbacks in the profiles
 of the currently active feedback theme. Which feedbacks are actually
 triggered depends on the daemon's current *feedback* *level*, per
 application settings and hints provided by the client with the event.
@@ -103,7 +103,7 @@ get canceled if the app that triggered them crashes.
 
 Each theme consists of up to three profile sections named `full`,
 `quiet` and `silent` containing event names and their associated
-feedback. feebackd's currently selected profile determines which
+feedback. feedbackd's currently selected profile determines which
 profiles of the current theme are being used for event lookup:
 
 - `full`: Use events from the `full`, `quiet` and `silent` profiles of
@@ -131,12 +131,12 @@ are mapped to feedbacks (sound, LED, vibra) via a configurable theme.
 
 There are two types of themes: *custom* themes and *device* themes.
 They both use the same format but have different purpose. Custom
-themes are meant to tweak feebackd's output to the users needs while
+themes are meant to tweak feedbackd's output to the users needs while
 device themes are meant to cater for hardware differences.
 
 #### Custom themes
 
-feebackd is shipped with a default theme `default.json`. You can
+feedbackd is shipped with a default theme `default.json`. You can
 replace this by your own, custom theme in multiple ways:
 
 1. By exporting an environment variable `FEEDBACK_THEME` with a path to a
@@ -147,7 +147,7 @@ replace this by your own, custom theme in multiple ways:
    default to `$HOME/.config`
 
 1. By creating a theme file under `$XDG_CONFIG_HOME/feedbackd/themes/custom.json` and
-   telling feebackd to use that theme. In this custom theme you only
+   telling feedbackd to use that theme. In this custom theme you only
    specify the events you want to change. Also add a `parent-name` entry
    to chain up to the default theme:
 
@@ -167,7 +167,7 @@ replace this by your own, custom theme in multiple ways:
    [here](./tests/data/user-config/feedbackd/themes/custom.json) for
    an example.
 
-   Once you have the file in place, tell feebackd to use this theme
+   Once you have the file in place, tell feedbackd to use this theme
    instead of the default one:
 
    ```sh
@@ -199,7 +199,7 @@ be used to avoid having to restart the daemon in case of configuration changes.
 
 ### Device themes
 
-feebackd has support to pick up device specific themes
+feedbackd has support to pick up device specific themes
 automatically. This allows us to handle device differences like
 varying strength of haptic motors or different LED colors in an
 automatic way.
@@ -332,7 +332,7 @@ gsettings set org.sigxcpu.feedbackd.application:/org/sigxcpu/feedbackd/applicati
 ## Haptic API
 
 In order to give applications like browsers and games more control
-over the haptic motor `Feebackd` implements an interface that allows
+over the haptic motor `Feedbackd` implements an interface that allows
 to set vibra patterns. The vibration pattern is given as a sequence of
 rumble magnitude and duration pairs like:
 
@@ -356,7 +356,7 @@ a haptic device is found.
 
 ## Code of Conduct
 
-Note that since feedbackd is hosted on freedesktop.org, feebackd follows its
+Note that since feedbackd is hosted on freedesktop.org, feedbackd follows its
 [Code of Conduct], based on the Contributor Covenant. Please conduct yourself
 in a respectful and civilized manner when communicating with community members
 on IRC and bug tracker.
