@@ -1,7 +1,7 @@
 feedbackd 0.8.9
 ---------------
 Released February 2026
-* Impreove docs
+* Improve docs
 * Add custom theme example
 * udev: Match LED on devices with multiple status LEDs
 * Simplify using media roles via build profile

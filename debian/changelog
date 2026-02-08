@@ -1302,7 +1302,7 @@ feedbackd (0.0.0+git20200420) amber; urgency=medium
 feedbackd (0.0.0+git20200305) amber-phone; urgency=medium
 
   * feedbackd-common: Add proper Breaks/Replaces.
-    This handles partial upgrades with newer schema but old feebackd.
+    This handles partial upgrades with newer schema but old feedbackd.
 
  -- Guido Günther <agx@sigxcpu.org>  Mon, 23 Mar 2020 10:21:14 +0100
 
