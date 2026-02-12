@@ -25,7 +25,7 @@ Build-Depends:
  umockdev,
  valac,
 Standards-Version: 4.6.2
-Homepage: https://gitlab.freedesktop.org/agx/feedbackd
+Homepage: https://gitlab.freedesktop.org/feedbackd/feedbackd
 Rules-Requires-Root: no
 
 Package: feedbackd

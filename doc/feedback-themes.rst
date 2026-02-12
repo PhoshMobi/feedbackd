@@ -24,7 +24,7 @@ ignored.
 Each event maps to at most one feedback in each profile. The events
 in the theme are named according to the
 `Event Naming Specifiaction
-<https://gitlab.freedesktop.org/agx/feedbackd/-/blob/main/doc/Event-naming-spec-0.0.0.md>`_.
+<https://gitlab.freedesktop.org/feedbackd/feedbackd/-/blob/main/doc/Event-naming-spec-0.0.0.md>`_.
 
 There are two types of themes: *custom* themes and *device* themes.
 They both use the same format but have different purpose. Custom
@@ -34,7 +34,7 @@ themes use a JSON format that can be validated with
 ``fbd-theme-validate(1)``.
 
 For details on how to create or modify feedback themes see
-``feedbackd's documentation`` at https://gitlab.freedesktop.org/agx/feedbackd#feedback-theme.
+``feedbackd's documentation`` at https://gitlab.freedesktop.org/feedbackd/feedbackd#feedback-theme.
 
 Feedback types
 --------------

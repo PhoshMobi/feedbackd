@@ -28,7 +28,7 @@ client disconnects from DBus. This makes sure all feedbacks get canceled if the
 app that triggered it crashes.
 
 For details refer to the event and feedback theme specs at
-`<https://gitlab.freedesktop.org/agx/feedbackd/>`__.
+`<https://gitlab.freedesktop.org/feedbackd/feedbackd/>`__.
 
 Feedbackd reloads the feedback theme on `SIGHUP` (i.e. `pkill -HUP feedbackd`).
 

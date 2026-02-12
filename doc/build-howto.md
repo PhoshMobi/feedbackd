@@ -4,7 +4,7 @@ Slug: building
 # Compiling with libfeedback
 
 If you need to build libfeedback, get the source from
-[here](https://gitlab.freedesktop.org/agx/feedbackd) and see the `README.md` file.
+[here](https://gitlab.freedesktop.org/feedbackd/feedbackd) and see the `README.md` file.
 
 ## Using `pkg-config`
 
@@ -27,7 +27,7 @@ Libfeedback can be used as a Meson subproject.  Create a
 ```ini
 [wrap-git]
 directory=libfeedback
-url=https://gitlab.freedesktop.org/agx/feedbackd.git
+url=https://gitlab.freedesktop.org/feedbackd/feedbackd.git
 revision=main
 depth=1
 ```
