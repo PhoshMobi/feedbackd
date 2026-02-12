@@ -17,7 +17,7 @@ licensed under LGPL 2.1+.
 ## Getting the source
 
 ```sh
-git clone https://gitlab.freedesktop.org/agx/feedbackd
+git clone https://gitlab.freedesktop.org/feedbackd/feedbackd.git
 cd feedbackd
 ```
 
@@ -351,7 +351,7 @@ a haptic device is found.
 
 ## Getting in Touch
 
-- Issue tracker: <https://gitlab.freedesktop.org/agx/feedbackd/-/issues>
+- Issue tracker: <https://gitlab.freedesktop.org/feedbackd/feedbackd/-/issues>
 - Chat via Matrix: <https://matrix.to/#/#phosh:phosh.mobi>
 
 ## Code of Conduct
@@ -369,7 +369,7 @@ on IRC and bug tracker.
 - [W3's vibration API draft](https://www.w3.org/TR/vibration/)
 
 [debian/control]: ./debian/control#L5
-[1]: https://gitlab.freedesktop.org/agx/feedbackd-device-themes
+[1]: https://gitlab.freedesktop.org/feedbackd/feedbackd-device-themes
 [feedback-themes]: ./doc/feedback-themes.rst
 [Code of Conduct]: https://www.freedesktop.org/wiki/CodeOfConduct/
 [feedbackd-themes manpage]: ./doc/feedbackd-themes.rst

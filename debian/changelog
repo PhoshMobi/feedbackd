@@ -43,7 +43,7 @@ feedbackd (0.8.8) experimental; urgency=medium
   [ Achill Gilgenast ]
   * data: Add sysusers configuration.
     Allows distros to add the feedbackd group by using sd-sysusers.
-    Closes: https://gitlab.freedesktop.org/agx/feedbackd/-/issues/83
+    Closes: https://gitlab.freedesktop.org/feedbackd/feedbackd/-/issues/83
 
   [ Guido Günther ]
   * packaging: Use dh-sysuser.
@@ -56,7 +56,7 @@ feedbackd (0.8.8) experimental; urgency=medium
     Otherwise we might exceed max brightness and get -EINVAL.
     Tested-by: Chris Vogel <chris@ween.de>
     Reported-by: Chris Vogel <chris@ween.de>
-    Closes: https://gitlab.freedesktop.org/agx/feedbackd/-/issues/95
+    Closes: https://gitlab.freedesktop.org/feedbackd/feedbackd/-/issues/95
 
  -- Guido Günther <agx@sigxcpu.org>  Tue, 30 Dec 2025 10:49:55 +0100
 
@@ -113,7 +113,7 @@ feedbackd (0.8.5) experimental; urgency=medium
     the global feedback level not any per app level the user
     might have configured as otherwise there's no way to override
     this.
-    Closes: https://gitlab.freedesktop.org/agx/feedbackd/-/issues/93
+    Closes: https://gitlab.freedesktop.org/feedbackd/feedbackd/-/issues/93
   * treewide: Clarify that `important` affects the global level.
     The DBus spec had it right but the other places weren't clear
     on that.
@@ -147,7 +147,7 @@ feedbackd (0.8.4) experimental; urgency=medium
     This allows us to e.g. add a particular sound for OSK key presses and
     OSKs can send this with an `important` hint so they're also usable
     in silent mode.
-    Closes: https://gitlab.freedesktop.org/agx/feedbackd/-/issues/85
+    Closes: https://gitlab.freedesktop.org/feedbackd/feedbackd/-/issues/85
   * schema: Allow Stevia OSK to override the globla feedback level
   * schema: Allow all OSK to use important hint.
     OSK use the common OSK app-id so allow that too.
@@ -198,7 +198,7 @@ feedbackd (0.8.2) experimental; urgency=medium
   * doc: Reference manpage.
     Refer to manpage rather than to the classes in the source code.
   * doc: Fix parent-name reference.
-    Closes: https://gitlab.freedesktop.org/agx/feedbackd/-/issues/89
+    Closes: https://gitlab.freedesktop.org/feedbackd/feedbackd/-/issues/89
   * doc: Clarify theme use
   * packaging: Fix inverted Breaks
   * fbd-dev-led-multicolor: Ignore LEDs that don't have three values.

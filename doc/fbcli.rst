@@ -28,7 +28,7 @@ OPTIONS
 ``-E=EVENT``, ``--event=EVENT``
   Submit the given event to ``feedbackd``. Valid events are listes in
   the event naming spec at
-  https://gitlab.freedesktop.org/agx/feedbackd/-/blob/main/doc/Event-naming-spec-0.0.0.md
+  https://gitlab.freedesktop.org/feedbackd/feedbackd/-/blob/main/doc/Event-naming-spec-0.0.0.md
 
 ``-I``, ``--important``
   Whether to set the important hint

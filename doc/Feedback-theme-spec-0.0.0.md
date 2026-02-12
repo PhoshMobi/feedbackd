@@ -67,7 +67,7 @@ silent:
 ```
 
 At the time of writing the theme format is daemon dependent. E.g. feedbackd
-uses a format [similar to the above in JSON](https://gitlab.freedesktop.org/agx/feedbackd/-/blob/main/data/default.json)
+uses a format [similar to the above in JSON](https://gitlab.freedesktop.org/feedbackd/feedbackd/-/blob/main/data/default.json)
 
 # Recommendations
 
@@ -77,4 +77,4 @@ uses a format [similar to the above in JSON](https://gitlab.freedesktop.org/agx/
   be used.
 - The full feedback theme can use any available feedback mechanisms
 
-[Event naming spec]: https://gitlab.freedesktop.org/agx/feedbackd/-/blob/main/doc/Event-naming-spec-0.0.0.md
+[Event naming spec]: https://gitlab.freedesktop.org/feedbackd/feedbackd/-/blob/main/doc/Event-naming-spec-0.0.0.md

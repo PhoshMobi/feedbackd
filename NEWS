@@ -17,8 +17,8 @@ Released December 2025
 * Create uses via systemd-sysusers
 * Fix max brightness for LED patterns on multicolor LEDs
 * Issues fixed:
-    * https://gitlab.freedesktop.org/agx/feedbackd/-/issues/83
-    * https://gitlab.freedesktop.org/agx/feedbackd/-/issues/95
+    * https://gitlab.freedesktop.org/feedbackd/feedbackd/-/issues/83
+    * https://gitlab.freedesktop.org/feedbackd/feedbackd/-/issues/95
 * Contributors:
     * Achill Gilgenast
     * Guido Günther
@@ -45,7 +45,7 @@ Released September 2025
   level not the app's feedback level
 * Add udev rule for FP5 haptic
 * Issues fixed:
-    * https://gitlab.freedesktop.org/agx/feedbackd/-/issues/93
+    * https://gitlab.freedesktop.org/feedbackd/feedbackd/-/issues/93
 * Contributors:
     * Guido Günther
     * Luca Weiss
@@ -58,7 +58,7 @@ Released August 2025
 * Add `key-pressed` and `key-released` events that e.g. OSKs can
   use to emit haptic feedback in silent mode
 * Issues fixed:
-    * https://gitlab.freedesktop.org/agx/feedbackd/-/issues/85
+    * https://gitlab.freedesktop.org/feedbackd/feedbackd/-/issues/85
 * Contributors:
     * Guido Günther
     * Sicelo A. Mhlongo
@@ -82,7 +82,7 @@ Released May 2025
 * vibra: Preserve original feedback value when the user changed
   strength
 * Issues fixed:
-    * https://gitlab.freedesktop.org/agx/feedbackd/-/issues/89
+    * https://gitlab.freedesktop.org/feedbackd/feedbackd/-/issues/89
 * Contributors:
     * Guido Günther
     * knoppix knoppix

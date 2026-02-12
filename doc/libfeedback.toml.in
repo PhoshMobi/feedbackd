@@ -3,9 +3,9 @@ version = "@VERSION@"
 description = "A library to trigger feedback (such as haptic feedback) via events sent by your application."
 authors = "Purism SPC"
 license = "LGPL-2.1-or-later"
-browse_url = "https://gitlab.freedesktop.org/agx/feedbackd/"
-repository_url = "https://gitlab.freedesktop.org/agx/feedbackd.git"
-website_url = "https://gitlab.freedesktop.org/agx/feedbackd/"
+browse_url = "https://gitlab.freedesktop.org/feedbackd/feedbackd/"
+repository_url = "https://gitlab.freedesktop.org/feedbackd/feedbackd.git"
+website_url = "https://gitlab.freedesktop.org/feedbackd/feedbackd/"
 dependencies = [
   "Gio-2.0",
   "GLib-2.0",
@@ -30,7 +30,7 @@ show_class_hierarchy = true
 
 [source-location]
 # The base URL for the web UI
-base_url = "https://gitlab.freedesktop.org/agx/feedbackd/-/blob/main/"
+base_url = "https://gitlab.freedesktop.org/feedbackd/feedbackd/-/blob/main/"
 # The format for links, using "filename" and "line" for the format
 file_format = "{filename}#L{line}"
 
