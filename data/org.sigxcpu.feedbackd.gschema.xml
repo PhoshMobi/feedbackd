@@ -33,7 +33,8 @@
     </key>
 
     <key name="allow-important" type="as">
-      <default>['mobi.phosh.Stevia',
+      <default>['mobi.phosh.Shell',
+                'mobi.phosh.Stevia',
                 'org.sigxcpu.FbdAlertSlider',
                 'org.gnome.clocks',
                 'sm.puri.OSK0']</default>
