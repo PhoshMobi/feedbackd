@@ -12,7 +12,7 @@ Events, and a larger list with many more examples to help with the
 creation of extended Events for third party applications, with
 different event types and usage.
 
-This is similar in spirit (and heavily based on) to the [Sound naming spec][].
+This is similar in spirit to (and heavily based on) the [Sound naming spec][].
 
 # Context
 
@@ -64,12 +64,6 @@ These events are meant to be used by applications.
 - *alarm-clock-elapsed*: A user configured alarm elapsed.
 - *camera-focus*: The event used when the camera got focus.
 - *camera-shutter*: The event used when a photo was taken.
-- *message-missed-email*: The event used when an email was received but not seen by the user.
-- *message-missed-instant*: The event used when a instant message was received but not seen by the user.
-- *message-missed-sms*: The event used when a sms message was received but not seen by the user.
-- *message-new-email*: The event used when a new email is received.
-- *message-new-instant*: The event used when a new IM is received.
-- *message-new-sms*: The event used when a new sms is received.
 - *phone-failure*: The event used when a phone/voip call is terminated because of a failure.
 - *phone-hangup*: The event used when a phone/voip call is hung up.
 - *phone-incoming-call*: The event used when a phone/voip call is coming in.
@@ -111,8 +105,14 @@ These events are meant to be used by system components.
 - *device-added*: The event used when a device has become available to the desktop, i.e. due to USB plugging.
 - *key-pressed*: The event used when a key on e.g. an on screen keyboard is pressed.
 - *key-released*: The event used when a key on e.g. an on screen keyboard is released.
+- *message-missed-email*: The event used when an email was received but not seen by the user.
+- *message-missed-instant*: The event used when a instant message was received but not seen by the user.
 - *message-missed-notification*: The event used when a notification was shown but not seen by the user. (*deprecated*)
+- *message-missed-sms*: The event used when a sms message was received but not seen by the user.
 - *message-new-cellbroadcast*: The event used when a new cell broadcast message is received.
+- *message-new-email*: The event used when a new email is received.
+- *message-new-instant*: The event used when a new IM is received.
+- *message-new-sms*: The event used when a new sms is received.
 - *notification-missed-generic*: The event used when a generic notification was
   shown but not seen by the user. This event is usually only used by
   the notification server.
