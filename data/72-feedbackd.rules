@@ -11,6 +11,8 @@ ACTION=="remove", GOTO="feedbackd_end"
 SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT}=="1", SUBSYSTEMS=="input", ATTRS{name}=="aw86927-haptics", TAG+="uaccess", ENV{FEEDBACKD_TYPE}="vibra"
 # Awinic AW8695 driver (not mainline)
 SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT}=="1", SUBSYSTEMS=="input", ATTRS{name}=="aw8695-haptics", TAG+="uaccess", ENV{FEEDBACKD_TYPE}="vibra"
+# Cirrus CS40L20 (Pixel 3, not mainline)
+SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT}=="1", SUBSYSTEMS=="input", ATTRS{name}=="cs40l20", TAG+="uaccess", ENV{FEEDBACKD_TYPE}="vibra"
 # Generic gpio-vibra driver (e.g. PinePhone)
 SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT}=="1", SUBSYSTEMS=="input", ATTRS{name}=="gpio-vibrator", TAG+="uaccess", ENV{FEEDBACKD_TYPE}="vibra"
 # Generic pwm-vibra driver (e.g. Librem 5)
@@ -25,8 +27,10 @@ SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT}=="1", SUBSYSTEMS=="input", A
 SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT}=="1", SUBSYSTEMS=="input", ATTRS{name}=="twl4030:vibrator", TAG+="uaccess", ENV{FEEDBACKD_TYPE}="vibra"
 # Qualcomm pm8xxx-vibrator driver
 SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT}=="1", SUBSYSTEMS=="input", ATTRS{name}=="pm8xxx_vib_ffmemless", TAG+="uaccess", ENV{FEEDBACKD_TYPE}="vibra"
-# Qualcomm spmi-haptics driver (e.g. Oneplus Enchilada, Fajita) (not mainline)
+# Qualcomm SPMI-haptics driver
 SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT}=="1", SUBSYSTEMS=="input", ATTRS{name}=="spmi_haptics", TAG+="uaccess", ENV{FEEDBACKD_TYPE}="vibra"
+# Qualcomm PMI8998 spmi-haptics driver (e.g. Oneplus enchilada, fajita) (not mainline)
+SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT}=="1", SUBSYSTEMS=="input", ATTRS{name}=="pmi8998_haptics", TAG+="uaccess", ENV{FEEDBACKD_TYPE}="vibra"
 # Texas Instruments drivers
 SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT}=="1", SUBSYSTEMS=="input", ATTRS{name}=="drv260x:haptics", TAG+="uaccess", ENV{FEEDBACKD_TYPE}="vibra"
 SUBSYSTEM=="input", KERNEL=="event*", ENV{ID_INPUT}=="1", SUBSYSTEMS=="input", ATTRS{name}=="drv2624:haptics", TAG+="uaccess", ENV{FEEDBACKD_TYPE}="vibra"
