@@ -352,7 +352,7 @@ a haptic device is found.
 ## Getting in Touch
 
 - Issue tracker: <https://gitlab.freedesktop.org/feedbackd/feedbackd/-/issues>
-- Chat via Matrix: <https://matrix.to/#/#phosh:phosh.mobi>
+- Chat via Matrix: <https://matrix.to/#/#feedbackd:phosh.mobi>
 
 ## Code of Conduct
 
