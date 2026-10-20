@@ -1,3 +1,25 @@
+feedbackd (0.8.10) experimental; urgency=medium
+
+  [ Guido Günther ]
+  * build: Bump meson version to 1.7
+  * doc: Fix feedbackd spelling. Thanks to Tomi
+  * treewide: Move to fdo project group
+  * notification-spec: Move message-* events to notifications.
+    While in theory applications could use these events if they don't
+    send out a notification having it listed in the *Application* category
+    leads to confusion.
+  * data: Allow Phosh to use the important hint. Can be useful for things like cell broadcasts.
+  * ci: Update shared scripts to 8605615.
+
+  [ David Heidelberg ]
+  * rules: Rename spmi-haptics to pmi8998-haptics and keep the spmi haptics driver.
+    Old pmi8998 haptics driver had to be renamed to not conflict with the new
+    generation upstreamed by Qualcomm:
+  * rules: Add WIP CS40L20 Pixel 3 haptics driver.
+    Not yet sent.
+
+ -- Guido Günther <agx@sigxcpu.org>  Tue, 20 Oct 2026 10:48:28 +0200
+
 feedbackd (0.8.9) experimental; urgency=medium
 
   [ Guido Günther ]

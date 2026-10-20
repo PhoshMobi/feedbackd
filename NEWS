@@ -1,3 +1,13 @@
+feedbackd 0.8.10
+----------------
+Released October 2026
+* Project moved to https://gitlab.freedesktop.org/feedbackd/
+* Allow Phosh to use the important hint (for e.g. cellbroadcasts)
+* Add pmi8998-haptics
+* Contributors:
+    * David Heidelberg
+    * Guido Günther
+
 feedbackd 0.8.9
 ---------------
 Released February 2026
