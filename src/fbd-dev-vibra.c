@@ -137,7 +137,7 @@ initable_init (GInitable     *initable,
   else {
     g_set_error (error,
                  G_FILE_ERROR, G_FILE_ERROR_FAILED,
-                 "No rumble capable vibra device “%s”: %s",
+                 "No periodic capable vibra device “%s”: %s",
                  filename, g_strerror (errno));
     return FALSE;
   }
