@@ -34,10 +34,10 @@ workflow:
 
 .image: &image
   image:
-    name: debian:trixie
+    name: debian:forky
 
 # Regular, full build
-build:gcc:native-debian-trixie:full:
+build:gcc:native-debian-forky:full:
   <<: *image
   <<: *before_script
   stage: build
@@ -52,7 +52,7 @@ build:gcc:native-debian-trixie:full:
       - $PKG_ONLY == "1"
 
 # Minimal build for e.g. submodule usage
-build:gcc:native-debian-trixie:lib:
+build:gcc:native-debian-forky:lib:
   <<: *image
   <<: *before_script
   stage: build
@@ -64,7 +64,7 @@ build:gcc:native-debian-trixie:lib:
       - $PKG_ONLY == "1"
 
 # Build using clang
-build:clang:native-debian-trixie:full:
+build:clang:native-debian-forky:full:
   variables:
     EXTRA_PKGS: clang
   <<: *image
@@ -81,12 +81,12 @@ build:clang:native-debian-trixie:full:
       - $PKG_ONLY == "1"
   allow_failure: true
 
-test:native-debian-trixie:
+test:native-debian-forky:
   <<: *image
   <<: *before_script
   stage: test+docs
   needs:
-    - build:gcc:native-debian-trixie:full
+    - build:gcc:native-debian-forky:full
   coverage: '/^\s+lines\.+:\s+([\d.]+\%)\s+/'
   script:
     - dbus-run-session ninja -C _build test
