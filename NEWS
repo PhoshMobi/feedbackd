@@ -1,3 +1,13 @@
+feedbackd 0.8.11
+----------------
+Released November 2026
+* Add haptic support for Motorola Edge 30 (motorola,dubai)
+* Manpage improvements
+* Contributors:
+    * David Heidelberg
+    * Gergo Koteles
+    * Guido Günther
+
 feedbackd 0.8.10
 ----------------
 Released October 2026

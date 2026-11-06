@@ -1,3 +1,22 @@
+feedbackd (0.8.11) experimental; urgency=medium
+
+  [ David Heidelberg ]
+  * vibra-periodic: Correct error message.
+
+  [ Guido Günther ]
+  * ci: Update to forky. Debian Trixie is a bit dated
+  * news: Fix typo
+  * feedback-themes: Copy-edit manpage.
+    Improve readability and fix some typos.
+
+  [ Gergo Koteles ]
+  * rules: Add WIP AW86224 Motorola Edge30 haptics driver.
+    The aw86224 driver is still among the PRs for sc7280-mainline, but I
+    will submit it to the mailing lists soon.
+    Link: https://github.com/sc7280-mainline/linux/pull/45/
+
+ -- Guido Günther <agx@sigxcpu.org>  Fri, 06 Nov 2026 14:09:23 +0100
+
 feedbackd (0.8.10) experimental; urgency=medium
 
   [ Guido Günther ]
